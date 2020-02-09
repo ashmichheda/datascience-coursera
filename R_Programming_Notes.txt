@@ -1,0 +1,37 @@
+- R is a dialect of S. S is a language that was developed by John Chambers and others at Bell labs.
+- S was initiated in 1976 as an internal statistical analysis environment - originally implemented as Fortran
+libraries.
+- The fundamentals of the S language has not really changed since 1998.
+
+-- Features of R --
+1. Syntax is very similar to S.
+2. Runs on almost any standard computing platform/OS (even on PlayStation 3)
+3. Frequent releases (annual + bugfix releases); active development
+4. Graphic capabilities very sophisticated and better than most stat packages.
+5. Quite lean, as far as software goes; functionality is divided into modular packages.
+
+
+-- Drawbacks of R --
+1. functionality is based on consumer demands, basically user contributions. If no feels like implementing your favorite method, then it's your job!
+   - (or you need to pay someone to do it.)
+
+
+
+-- R console input and Evaluation --
+At the R prompt we type expressions. The <- symbol is the assignment operator.
+The # character indicates a comment. Anything to the right of the # (including the # itself) is ignored.
+
+
+> x <- 5
+> x
+[1] 5
+
+The [1] indicates that x is a vector and 5 is the first element.
+
+-- Printing --
+> x <- 1:20 # Creates a sequence from 1 to 20
+> x
+[1] 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+[16] 16 17 18 19 20
+
+The : operator is used to create integer sequences.
