@@ -1,0 +1,219 @@
+
+| Missing values play an important role in statistics and data
+| analysis. Often, missing values must not be ignored, but rather they
+| should be carefully studied to see if there's an underlying pattern
+| or cause for their missingness.
+
+...
+
+  |===                                                          |   5%
+| In R, NA is used to represent any value that is 'not available' or
+| 'missing' (in the statistical sense). In this lesson, we'll explore
+| missing values further.
+
+...
+
+  |======                                                       |  10%
+| Any operation involving NA generally yields NA as the result. To
+| illustrate, let's create a vector c(44, NA, 5, NA) and assign it to
+| a variable x.
+
+> x <- c(44, NA, 5, NA)
+
+| You are doing so well!
+
+  |=========                                                    |  15%
+| Now, let's multiply x by 3.
+
+> x%*%3
+Error in x %*% 3 : non-conformable arguments
+> x * 3
+[1] 132  NA  15  NA
+
+| Excellent work!
+
+  |============                                                 |  20%
+| Notice that the elements of the resulting vector that correspond
+| with the NA values in x are also NA.
+
+...
+
+  |===============                                              |  25%
+| To make things a little more interesting, lets create a vector
+| containing 1000 draws from a standard normal distribution with y <-
+| rnorm(1000).
+
+> y <- rnorm(1000)
+
+| That's a job well done!
+
+  |==================                                           |  30%
+| Next, let's create a vector containing 1000 NAs with z <- rep(NA,
+| 1000).
+
+> z <- rep(NA, 1000)
+
+| Great job!
+
+  |=====================                                        |  35%
+| Finally, let's select 100 elements at random from these 2000 values
+| (combining y and z) such that we don't know how many NAs we'll wind
+| up with or what positions they'll occupy in our final vector --
+| my_data <- sample(c(y, z), 100).
+
+> my_data <- sample(c(y, z), 100)
+
+| Your dedication is inspiring!
+
+  |========================                                     |  40%
+| Let's first ask the question of where our NAs are located in our
+| data. The is.na() function tells us whether each element of a vector
+| is NA. Call is.na() on my_data and assign the result to my_na.
+
+> is.na(my_data)
+  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE
+ [12]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
+ [23]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE
+ [34] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [45] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE
+ [56] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE
+ [67] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
+ [78] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [89] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE
+[100] FALSE
+
+| Not exactly. Give it another go. Or, type info() for more options.
+
+| Assign the result of is.na(my_data) to the variable my_na.
+
+> my_na <- is.na(my_data)
+
+| Excellent job!
+
+  |===========================                                  |  45%
+| Now, print my_na to see what you came up with.
+
+> my_na
+  [1]  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE
+ [12]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
+ [23]  TRUE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE
+ [34] FALSE  TRUE FALSE FALSE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE
+ [45] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE FALSE
+ [56] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE
+ [67] FALSE FALSE  TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE
+ [78] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE
+ [89] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE
+[100] FALSE
+
+| Keep up the great work!
+
+  |==============================                               |  50%
+| Everywhere you see a TRUE, you know the corresponding element of
+| my_data is NA. Likewise, everywhere you see a FALSE, you know the
+| corresponding element of my_data is one of our random draws from the
+| standard normal distribution.
+
+...
+
+  |==================================                           |  55%
+| In our previous discussion of logical operators, we introduced the
+| `==` operator as a method of testing for equality between two
+| objects. So, you might think the expression my_data == NA yields the
+| same results as is.na(). Give it a try.
+
+> my_data == NA
+  [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+ [23] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+ [45] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+ [67] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+ [89] NA NA NA NA NA NA NA NA NA NA NA NA
+
+| Keep working like that and you'll get there!
+
+  |=====================================                        |  60%
+| The reason you got a vector of all NAs is that NA is not really a
+| value, but just a placeholder for a quantity that is not available.
+| Therefore the logical expression is incomplete and R has no choice
+| but to return a vector of the same length as my_data that contains
+| all NAs.
+
+...
+
+  |========================================                     |  65%
+| Don't worry if that's a little confusing. The key takeaway is to be
+| cautious when using logical expressions anytime NAs might creep in,
+| since a single NA value can derail the entire thing.
+
+...
+
+  |===========================================                  |  70%
+| So, back to the task at hand. Now that we have a vector, my_na, that
+| has a TRUE for every NA and FALSE for every numeric value, we can
+| compute the total number of NAs in our data.
+
+...
+
+  |==============================================               |  75%
+| The trick is to recognize that underneath the surface, R represents
+| TRUE as the number 1 and FALSE as the number 0. Therefore, if we
+| take the sum of a bunch of TRUEs and FALSEs, we get the total number
+| of TRUEs.
+
+...
+
+  |=================================================            |  80%
+| Let's give that a try here. Call the sum() function on my_na to
+| count the total number of TRUEs in my_na, and thus the total number
+| of NAs in my_data. Don't assign the result to a new variable.
+
+> sum(my_na)
+[1] 46
+
+| All that practice is paying off!
+
+  |====================================================         |  85%
+| Pretty cool, huh? Finally, let's take a look at the data to convince
+| ourselves that everything 'adds up'. Print my_data to the console.
+
+> my_data
+  [1]           NA           NA           NA  0.570456702  0.172560719
+  [6]           NA  0.537142221 -0.139668924           NA           NA
+ [11] -0.413144037           NA           NA  0.794555896 -1.507343170
+ [16]           NA -0.009601301           NA           NA -1.687106361
+ [21] -1.352484733  0.434113058           NA           NA  0.920001325
+ [26] -0.743200629           NA -0.720741207           NA  1.625081717
+ [31]           NA -1.203901340           NA -0.468564267           NA
+ [36] -0.500582843  0.063285304           NA -0.518874128           NA
+ [41]  1.164367041 -1.300958716 -1.011412383 -1.043396505 -0.093037302
+ [46]  0.595530622 -0.016101719           NA           NA           NA
+ [51]           NA -0.081316668           NA           NA -1.174733845
+ [56] -0.045051186           NA -0.548219610 -2.886707639 -1.291170171
+ [61] -0.698249868           NA           NA -0.619016937           NA
+ [66]           NA -0.387745682  0.253725984           NA  0.127997247
+ [71]           NA -0.307821997           NA           NA -0.686038271
+ [76] -0.461639650 -0.824831751 -0.723819521           NA           NA
+ [81]           NA           NA  0.433339127 -0.901892203           NA
+ [86]  0.183121395  0.405075308 -0.448226153 -2.213519878           NA
+ [91]  0.010291906           NA           NA           NA           NA
+ [96]  1.003340216  0.102228893           NA -0.148977497  2.175818812
+
+| Keep up the great work!
+
+  |=======================================================      |  90%
+| Now that we've got NAs down pat, let's look at a second type of
+| missing value -- NaN, which stands for 'not a number'. To generate
+| NaN, try dividing (using a forward slash) 0 by 0 now.
+
+> 0/0
+[1] NaN
+
+| You nailed it! Good job!
+
+  |==========================================================   |  95%
+| Let's do one more, just for fun. In R, Inf stands for infinity. What
+| happens if you subtract Inf from Inf?
+
+> Inf-Inf
+[1] NaN
+
+| All that hard work is paying off!
