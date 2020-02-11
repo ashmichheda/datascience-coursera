@@ -26,5 +26,6 @@ xVal <- c(1, 2, NA, NaN, 34)
 is.na(xVal)
 is.nan(xVal)
 
-
+x <- list(foo = 1:4, baz = "hello")
+x$foo
 
