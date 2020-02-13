@@ -1,2 +1,2 @@
 # datascience-coursera
-This Repository is created as assignment for Coursera course (The Data Scientist's Toolbox)
+This Repository contains assignments, quizes and projects of R programming course offered by John Hopkins University on Coursera.
